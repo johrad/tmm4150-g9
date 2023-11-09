@@ -10,5 +10,6 @@ while True:
             data = json.load(f)
     except Exception as e:
         print(e)
+    pass
     print(data, end='\r')
     sleep(0.2)
