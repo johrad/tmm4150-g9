@@ -5,8 +5,10 @@ filepath = "/home/data/data.json"
 
 
 while True:
-    with open(filepath, "r") as f:
-        data = json.load(f)
-
-    print(data)
+    try:
+        with open(filepath, "r") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(e)
+    print(data, end='\r')
     sleep(0.2)
