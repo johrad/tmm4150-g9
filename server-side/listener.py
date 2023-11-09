@@ -10,10 +10,9 @@ while True:
             data = json.load(f)
         print(data, end='\r')
     
-    except Exception as e: # ignore if no data file present
-        print(e)
-    
-    pass
-    
+    except FileNotFoundError: # ignore if no data file present
+        pass
+    except Exception as e:
+        print("ERROR!!:" e)
 
-    sleep(0.2)
+    sleep(0.5)
