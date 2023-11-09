@@ -13,6 +13,6 @@ while True:
     except FileNotFoundError: # ignore if no data file present
         pass
     except Exception as e:
-        print("ERROR!!:" e)
+        print("ERROR!!:", e)
 
     sleep(0.5)
