@@ -8,8 +8,12 @@ while True:
     try:
         with open(filepath, "r") as f:
             data = json.load(f)
-    except Exception as e:
+        print(data, end='\r')
+    
+    except Exception as e: # ignore if no data file present
         print(e)
+    
     pass
-    print(data, end='\r')
+    
+
     sleep(0.2)
