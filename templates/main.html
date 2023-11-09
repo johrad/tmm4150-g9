@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Battlebot display</title>
+</head>
+<body>
+    <div class="header">
+        <h1>FULL TRØKK</h1>
+    </div>
+    <div class="content">
+        <div class="image-container">
+            <img class="image" src="../static/test.gif" alt="Battlebot Image">
+        </div>
+        <div class="info-box">
+            <h2>Information</h2>
+            <p><strong>Pressure:</strong> <span id="pressure"></span></p>
+            <div class="loading-container">
+                <div class="loading-bar" id="loading-bar"></div>
+            </div>
+            <p><strong>Battery Percentage:</strong></p>
+            <div class="progress-bar">
+                <div id="progress-value"><span id="battery_percentage"></span></div>
+              </div>
+            <p><strong>Attacks:</strong> <span id="attacks"></span></p>
+            
+        </div>
+    </div>
+
+    <script>
+        function updateData(data) {
+            document.getElementById('pressure').innerText = data.pressure;
+            document.getElementById('battery_percentage').innerText = data.battery_percentage;
+            document.getElementById('attacks').innerText = data.attacks;
+            const battery_level = document.getElementById("progress-value");
+            const loadingBar = document.getElementById("loading-bar");
+            
+            battery_level.style.width = String(data.battery_percentage)  + "%";
+            if (data.pressure === 1) {
+                startLoadingBar()
+            } else {
+                stopLoadingBar()
+            }
+        }
+
+        function startLoadingBar() {
+            const loadingBar = document.getElementById("loading-bar");
+            loadingBar.classList.remove("short-transition");
+            loadingBar.style.width = "100%";
+        }
+        
+        function stopLoadingBar() {
+            const loadingBar = document.getElementById("loading-bar");
+            loadingBar.classList.add("short-transition");
+            loadingBar.style.width = "0";
+        }
+    
+        function fetchDataAndUpdate() {
+            fetch('/get_data')
+                .then(response => response.json())
+                .then(data => updateData(data));
+        }      
+
+        setInterval(fetchDataAndUpdate, 1000);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchDataAndUpdate();
+        });
+    </script>
+    <style>
+        body {
+            background-color: #282c34;
+            color: #61dafb;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .image-container {
+            flex: 1;
+        }
+        .image {
+            width: 50%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .info-box {
+            border: 2px solid #61dafb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            background-color: #333;
+        }
+
+        .loading-container {
+            width: 300px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+
+        .loading-bar {
+            height: 30px;
+            max-width: 100%;
+            width: 0;
+            background-color: #4caf50;
+            transition: width 5s linear;
+        }
+
+        .loading-bar.short-transition {
+            transition: width 1s linear;
+        }     
+        
+        .progress-bar {
+            background-color: #e0e0e0;
+            height: 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+          }
+          
+          #progress-value {
+            background-color: #4caf50;
+            height: 100%;
+            width: 0%;
+            text-align: center;
+            line-height: 20px;
+            color: #fff;
+          }
+          
+          .pressure-value,
+          .attack-count {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+          }
+                  
+    </style>
+</body>
+</html>
