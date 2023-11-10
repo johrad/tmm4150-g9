@@ -1,3 +1,3 @@
 *.json
 config.py
-__pycache__/*
+pi-side/__pycache__/*
