@@ -2,32 +2,29 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-pressure = 1
-battery_percentage = 0
-attacks = 0
-
+attackBoolean, bms_voltage, compressorState = 0,0,0
 
 @app.route('/')
 def start_page():
-    data = {'pressure': pressure, 'battery_percentage': battery_percentage, 'attacks': attacks}
+    data = {'attackBoolean': attackBoolean, 'bms_voltage': bms_voltage, 'compressorState': compressorState}
     return render_template('main.html', **data)
-
 
 @app.route('/upload', methods=['POST'])
 def receive_data():
-    global pressure, battery_percentage, attacks
+    print("boob")
+    global bms_voltage, attackBoolean, compressorState
     data = request.get_json()
 
-    pressure = data['pressure']
-    battery_percentage = data['battery_percentage']
-    attacks = data['attacks']
+    attackBoolean = data['attackBoolean']
+    bms_voltage = data['bms_voltage']
+    compressorState = data['compressorState']
 
     return jsonify({'success': True})
 
 
 @app.route('/get_data', methods=['GET'])
 def get_data():
-    data = {'pressure': pressure, 'battery_percentage': battery_percentage, 'attacks': attacks}
+    data = {'attackBoolean': attackBoolean, 'bms_voltage': bms_voltage, 'compressorState': compressorState}
     
     return jsonify(data)    
     
