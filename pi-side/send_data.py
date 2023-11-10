@@ -1,5 +1,5 @@
 import requests
-from config import server_ip
+from config import serverAddress
 
 
 def send(data):  
