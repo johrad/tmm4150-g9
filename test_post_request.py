@@ -1,9 +1,9 @@
 import requests
 
 data = {
-    'pressure': 0,
-    'battery_percentage': 95,
-    'attacks': 3
+    'attackBoolean': 1,
+    'battery_percentage': 90,
+    'compressorBoolean': 0
 }
 
 response = requests.post('http://localhost:8044/upload', json=data)

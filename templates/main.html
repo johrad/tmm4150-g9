@@ -13,7 +13,7 @@
         </div>
         <div class="info-box">
             <h2>Information</h2>
-            <p><strong>Pressure:</strong> <span id="pressure"></span></p>
+            <p><strong>Weapon status:</strong> <span id="pressure"></span></p>
             <div class="loading-container">
                 <div class="loading-bar" id="loading-bar"></div>
             </div>
@@ -28,16 +28,17 @@
 
     <script>
         function updateData(data) {
-            document.getElementById('pressure').innerText = data.pressure;
+            //document.getElementById('pressure').innerText = data.pressure;
             document.getElementById('battery_percentage').innerText = data.battery_percentage;
             document.getElementById('attacks').innerText = data.attacks;
             const battery_level = document.getElementById("progress-value");
             const loadingBar = document.getElementById("loading-bar");
             
             battery_level.style.width = String(data.battery_percentage)  + "%";
-            if (data.pressure === 1) {
+            if (data.compressorBoolean === 1) {
                 startLoadingBar()
-            } else {
+            }
+            if (data.attackBoolean === 1){
                 stopLoadingBar()
             }
         }
