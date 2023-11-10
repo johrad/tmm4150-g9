@@ -1,12 +1,16 @@
-from config import server_ip, server_username, path_server
-import subprocess
+import requests
+from config import server_ip
 
-def send(filepath):    
-    try:
-        # subprocess.Popen(['scp', 'data.json', f'{server_username}@{server_ip}:/home/data'])
-        subprocess.Popen(['scp', filepath, f'{server_username}@{server_ip}:/home/data'])
-    except Exception as e:
-        print("ERROR!! ", e)
+
+def send(data):  
+    data = {'attackBoolean': True, 'bms_voltage': 11.2, 'compressorState': False}
+
+    serverAddress = "http://199.247.7.163:8055"
+    localhost = 'http://localhost:8044'
+    # Send the POST request object and receive the response
+    response = requests.post(url=f'{serverAddress}/upload', json=data)
+    print(response)   
+
 
 
 
