@@ -1,22 +1,15 @@
 import random as r
-import json
+import requests
 
 
 
-def collectData(filepath):
 
-    currentPressure = r.randint(0,200)
-    currentBMSvoltage = r.randint(0,12)
+def collectData():
 
-    # put data into json file:
-    data = { 
-    "timestamp": "test data2",
-    "pressure": currentPressure,
-    "bms-voltage": currentBMSvoltage
-    }
+    ## add the collection stuff code and stuff stuff here.
+    attackBoolean = r.randint(0,1)
+    bms_voltage = r.randint(0,12)
+    compressorState = r.randint(0,1)
 
-    with open(filepath, "w") as f:
-        f.write(json.dumps(data))
-
-
-
+    data = {'attackBoolean': True, 'bms_voltage': 11.2, 'compressorState': False}
+    return data

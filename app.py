@@ -12,7 +12,6 @@ def start_page():
     data = {'battery_percentage': battery_percentage, 'attacks': attacks}
     return render_template('main.html', **data)
 
-
 @app.route('/upload', methods=['POST'])
 def receive_data():
     global attackBoolean, battery_percentage, compressorBoolean, attacks
