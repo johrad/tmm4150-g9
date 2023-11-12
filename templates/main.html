@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Battlebot display</title>
 </head>
+
 <body>
     <div class="header">
         <h1>FULL TRØKK</h1>
@@ -20,9 +22,9 @@
             <p><strong>Battery Percentage:</strong></p>
             <div class="progress-bar">
                 <div id="progress-value"><span id="battery_percentage"></span></div>
-              </div>
+            </div>
             <p><strong>Attacks:</strong> <span id="attacks"></span></p>
-            
+
         </div>
     </div>
 
@@ -33,12 +35,12 @@
             document.getElementById('attacks').innerText = data.attacks;
             const battery_level = document.getElementById("progress-value");
             const loadingBar = document.getElementById("loading-bar");
-            
-            battery_level.style.width = String(data.battery_percentage)  + "%";
+
+            battery_level.style.width = String(data.battery_percentage) + "%";
             if (data.compressorBoolean === 1) {
                 startLoadingBar()
             }
-            if (data.attackBoolean === 1){
+            if (data.attackBoolean === 1) {
                 stopLoadingBar()
             }
         }
@@ -48,18 +50,18 @@
             loadingBar.classList.remove("short-transition");
             loadingBar.style.width = "100%";
         }
-        
+
         function stopLoadingBar() {
             const loadingBar = document.getElementById("loading-bar");
             loadingBar.classList.add("short-transition");
             loadingBar.style.width = "0";
         }
-    
+
         function fetchDataAndUpdate() {
             fetch('/get_data')
                 .then(response => response.json())
                 .then(data => updateData(data));
-        }      
+        }
 
         setInterval(fetchDataAndUpdate, 1000);
 
@@ -75,23 +77,28 @@
             text-align: center;
             margin: 50px;
         }
+
         .header {
             text-align: center;
             padding: 20px;
             color: #fff;
         }
+
         .content {
             display: flex;
             flex-wrap: wrap;
         }
+
         .image-container {
             flex: 1;
         }
+
         .image {
             width: 50%;
             height: auto;
             border-radius: 10px;
         }
+
         .info-box {
             border: 2px solid #61dafb;
             border-radius: 10px;
@@ -116,32 +123,32 @@
 
         .loading-bar.short-transition {
             transition: width 1s linear;
-        }     
-        
+        }
+
         .progress-bar {
             background-color: #e0e0e0;
             height: 20px;
             border-radius: 5px;
             margin-top: 10px;
             overflow: hidden;
-          }
-          
-          #progress-value {
+        }
+
+        #progress-value {
             background-color: #4caf50;
             height: 100%;
             width: 0%;
             text-align: center;
             line-height: 20px;
             color: #fff;
-          }
-          
-          .pressure-value,
-          .attack-count {
+        }
+
+        .pressure-value,
+        .attack-count {
             font-size: 24px;
             font-weight: bold;
             color: #3498db;
-          }
-                  
+        }
     </style>
 </body>
+
 </html>

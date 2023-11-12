@@ -1,3 +1,4 @@
 *.json
 config.py
 pi-side/__pycache__/*
+testreq.py
