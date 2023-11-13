@@ -17,15 +17,19 @@ def receive_data():
     global attackBoolean, battery_percentage, compressorBoolean, attacks
     data = request.get_json()
 
-    attackBoolean = data['attackBoolean']
-    battery_percentage = data['battery_percentage']
-    compressorBoolean = data['compressorBoolean']
-    
+    # Update only the received values if present
+    if 'attackBoolean' in data:
+        attackBoolean = data['attackBoolean']
+    if 'battery_percentage' in data:
+        battery_percentage = data['battery_percentage']
+    if 'compressorBoolean' in data:
+        compressorBoolean = data['compressorBoolean']
+
+    print(f"Data Recieved: \n{data}\n")
     if attackBoolean:
         attacks += 1
     
     return jsonify({'success': True})
-
 
 @app.route('/get_data', methods=['GET'])
 def get_data():

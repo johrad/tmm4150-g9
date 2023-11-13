@@ -1,9 +1,19 @@
-from time import sleep
-import collectData
-import send_data
+from threading import Thread
+from buttonMonitor import buttonMonitor
+from bmsMonitor import bmsMonitor
 
+def main():
+    # Create threads
+    button_thread = Thread(target=buttonMonitor)
+    bms_thread = Thread(target=bmsMonitor)
 
-while True:
-    send_data.send(collectData.collectData()) # CollectData() returns data in json
+    # Start threads
+    button_thread.start()
+    bms_thread.start()
 
-    sleep(2)
+    # Wait for threads to finish
+    button_thread.join()
+    bms_thread.join()
+
+if __name__ == "__main__":
+    main()
