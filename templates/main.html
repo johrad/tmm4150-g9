@@ -14,25 +14,25 @@
             <img class="image" src="../static/test.gif" alt="Battlebot Image">
         </div>
         <div class="info-box">
-            <h2>Information</h2>
-            <p><strong>Weapon status:</strong> <span id="pressure"></span></p>
+            <p><strong>Weapon status:</strong> <span id="pressure"></span></p><br>
             <div class="loading-container">
                 <div class="loading-bar" id="loading-bar"></div>
             </div>
             <p><strong>Battery Percentage:</strong></p>
             <div class="progress-bar">
                 <div id="progress-value"><span id="battery_percentage"></span></div>
-            </div>
-            <p><strong>Attacks:</strong> <span id="attacks"></span></p>
-
+            </div><br>
+            <p><strong>Attacks:</strong><br><div class="attack-count"><span id="attacks"></span></div></p>
         </div>
-    </div>
+    </div><br>
+    <audio id="musicPlayer" controls>
+        <source src="../static/the_time_is_now.mp3" type="audio/mp3">
+    </audio>
 
     <script>
         let prevAttacks = 0
 
         function updateData(data) {
-            //document.getElementById('pressure').innerText = data.pressure;
             document.getElementById('battery_percentage').innerText = data.battery_percentage;
             document.getElementById('attacks').innerText = data.attacks;
             const battery_level = document.getElementById("progress-value");
@@ -70,6 +70,8 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             fetchDataAndUpdate();
+            var audio = document.getElementById('musicPlayer');
+            audio.play();
         });
     </script>
     <style>
@@ -80,38 +82,42 @@
             text-align: center;
             margin: 50px;
         }
-
         .header {
             text-align: center;
-            padding: 20px;
             color: #fff;
         }
-
         .content {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
         }
-
+        .image-container,
+        .info-box {
+            flex: 1;
+            max-width: 40%;
+            box-sizing: border-box;
+        }
         .image-container {
             flex: 1;
+            margin-right: 20px;
         }
-
         .image {
-            width: 50%;
+            width: 100%;
             height: auto;
             border-radius: 10px;
         }
-
         .info-box {
             border: 2px solid #61dafb;
             border-radius: 10px;
             padding: 20px;
-            margin: 20px;
             background-color: #333;
+            font-size: 20px;
+            marigin_top: 0px;
+            margin-left: 20px;
         }
 
         .loading-container {
-            width: 300px;
+            width: 100%;
             border: 1px solid #ccc;
             overflow: hidden;
         }
@@ -126,31 +132,31 @@
 
         .loading-bar.short-transition {
             transition: width 1s linear;
-        }
-
+        }     
+        
         .progress-bar {
             background-color: #e0e0e0;
             height: 20px;
             border-radius: 5px;
             margin-top: 10px;
             overflow: hidden;
-        }
-
-        #progress-value {
+          }
+          
+          #progress-value {
             background-color: #4caf50;
             height: 100%;
             width: 0%;
             text-align: center;
             line-height: 20px;
             color: #fff;
-        }
-
-        .pressure-value,
-        .attack-count {
-            font-size: 24px;
+          }
+          
+          .attack-count {
+            font-size: 48px;
             font-weight: bold;
-            color: #3498db;
-        }
+            color: #4caf50
+          }
+                  
     </style>
 </body>
 
