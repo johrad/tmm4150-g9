@@ -5,7 +5,9 @@ app = Flask(__name__)
 attackBoolean = 0
 battery_percentage = 100
 compressorBoolean = 0
+
 attacks = 0
+attacksOld = 0
 
 @app.route('/')
 def start_page():
@@ -21,17 +23,15 @@ def receive_data():
     if 'attackBoolean' in data:
         attackBoolean = data['attackBoolean']
         if attackBoolean == 1:
-            attacks += 1
-            attackBoolean = 0 # to prevent attackspam
+            attacks += 1  # to prevent attackspam
+            attackBoolean = 0
     if 'battery_percentage' in data:
         battery_percentage = data['battery_percentage']
     if 'compressorBoolean' in data:
         compressorBoolean = data['compressorBoolean']
 
     print(f"Data Recieved: \n{data}\n")
-    if attackBoolean:
-        attacks += 1
-    
+
     return jsonify({'success': True})
 
 @app.route('/get_data', methods=['GET'])

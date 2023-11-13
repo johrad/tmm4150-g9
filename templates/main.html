@@ -29,6 +29,8 @@
     </div>
 
     <script>
+        let prevAttacks = 0
+
         function updateData(data) {
             //document.getElementById('pressure').innerText = data.pressure;
             document.getElementById('battery_percentage').innerText = data.battery_percentage;
@@ -40,7 +42,8 @@
             if (data.compressorBoolean === 1) {
                 startLoadingBar()
             }
-            if (data.attackBoolean === 1) {
+            if (data.attacks > prevAttacks) {
+                prevAttacks = data.attacks
                 stopLoadingBar()
             }
         }
