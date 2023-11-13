@@ -1,6 +1,5 @@
 #!/bin/bash
 echo "starting program"
-cd "~/tmm4150-g9"
 while true; do
     python3 pi-side/main.py
     if [[ "$?" != "0" ]]; then
