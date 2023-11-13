@@ -25,6 +25,7 @@ def receive_data():
     if 'compressorBoolean' in data:
         compressorBoolean = data['compressorBoolean']
 
+    print(f"Data Recieved: \n{data}\n")
     if attackBoolean:
         attacks += 1
     
