@@ -29,6 +29,8 @@ def receive_data():
         compressorBoolean = data['compressorBoolean']
 
     print(f"Data Recieved: \n{data}\n")
+    if attackBoolean:
+        attacks += 1
     
     return jsonify({'success': True})
 
