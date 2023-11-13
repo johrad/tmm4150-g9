@@ -20,13 +20,15 @@ def receive_data():
     # Update only the received values if present
     if 'attackBoolean' in data:
         attackBoolean = data['attackBoolean']
+        if attackBoolean == 1:
+            attacks += 1
+            attackBoolean = 0 # to prevent attackspam
     if 'battery_percentage' in data:
         battery_percentage = data['battery_percentage']
     if 'compressorBoolean' in data:
         compressorBoolean = data['compressorBoolean']
 
-    if attackBoolean:
-        attacks += 1
+    print(f"Data Recieved: \n{data}\n")
     
     return jsonify({'success': True})
 
@@ -38,3 +40,4 @@ def get_data():
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8044)
+
