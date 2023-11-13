@@ -12,7 +12,6 @@
             <img class="image" src="../static/test.gif" alt="Battlebot Image">
         </div>
         <div class="info-box">
-            <h2>Information</h2>
             <p><strong>Weapon status:</strong> <span id="pressure"></span></p>
             <div class="loading-container">
                 <div class="loading-bar" id="loading-bar"></div>
@@ -21,14 +20,13 @@
             <div class="progress-bar">
                 <div id="progress-value"><span id="battery_percentage"></span></div>
               </div>
-            <p><strong>Attacks:</strong> <span id="attacks"></span></p>
+            <p><strong>Attacks:</strong><br><div class="attack-count"><span id="attacks"></span></div></p>
             
         </div>
     </div>
 
     <script>
         function updateData(data) {
-            //document.getElementById('pressure').innerText = data.pressure;
             document.getElementById('battery_percentage').innerText = data.battery_percentage;
             document.getElementById('attacks').innerText = data.attacks;
             const battery_level = document.getElementById("progress-value");
@@ -77,18 +75,25 @@
         }
         .header {
             text-align: center;
-            padding: 20px;
             color: #fff;
         }
         .content {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center; /* Center the content horizontally */
+        }
+        .image-container,
+        .info-box {
+            flex: 1; /* Each takes up 50% of the width */
+            max-width: 40%; /* To ensure each takes up a maximum of 50% */
+            box-sizing: border-box; /* Include padding and border in the width calculation */
         }
         .image-container {
             flex: 1;
+            margin-right: 30px; /* Add some margin for spacing between image-container and info-box */
         }
         .image {
-            width: 50%;
+            width: 100%;
             height: auto;
             border-radius: 10px;
         }
@@ -96,12 +101,13 @@
             border: 2px solid #61dafb;
             border-radius: 10px;
             padding: 20px;
-            margin: 20px;
             background-color: #333;
+            font-size: 20px;
+            marigin-left: 30px;
         }
 
         .loading-container {
-            width: 300px;
+            width: 100%%;
             border: 1px solid #ccc;
             overflow: hidden;
         }
@@ -137,9 +143,9 @@
           
           .pressure-value,
           .attack-count {
-            font-size: 24px;
+            font-size: 48px;
             font-weight: bold;
-            color: #3498db;
+            color: #4caf50
           }
                   
     </style>
