@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Battlebot display</title>
+</head>
+
+<body>
+    <div class="header">
+        <img src="../static/full_trokk_header_red.png" alt="Full trøkk Image" width="400"></div>
+    <div class="content">
+        <div class="image-container">
+            <img class="image" src="../static/full_trokk.gif" alt="Battlebot Image">
+        </div>
+        <div class="info-box">
+            <p><strong>Weapon status:</strong> <span id="pressure"></span></p>
+            <div class="loading-container">
+                <div class="loading-bar" id="loading-bar"></div>
+            </div>
+            <p><strong>Attacks:</strong><div class="attack-count"><span id="attacks"></span></div></p>
+        </div>
+    </div><br>
+    <audio id="musicPlayer" controls>
+        <source src="../static/the_time_is_now.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        let prevAttacks = 0
+
+        function updateData(data) {
+            document.getElementById('attacks').innerText = data.attacks;
+            const battery_level = document.getElementById("progress-value");
+            const loadingBar = document.getElementById("loading-bar");
+
+            if (data.compressorBoolean === 1) {
+                startLoadingBar()
+            }
+            if (data.attacks > prevAttacks) {
+                prevAttacks = data.attacks
+                stopLoadingBar()
+            }
+        }
+
+        function startLoadingBar() {
+            const loadingBar = document.getElementById("loading-bar");
+            loadingBar.classList.remove("short-transition");
+            loadingBar.style.width = "100%";
+        }
+
+        function stopLoadingBar() {
+            const loadingBar = document.getElementById("loading-bar");
+            loadingBar.classList.add("short-transition");
+            loadingBar.style.width = "0";
+        }
+
+        function fetchDataAndUpdate() {
+            fetch('/get_data')
+                .then(response => response.json())
+                .then(data => updateData(data));
+        }
+
+        setInterval(fetchDataAndUpdate, 1000);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchDataAndUpdate();
+            var audio = document.getElementById('musicPlayer');
+            audio.play();
+        });
+    </script>
+    <style>
+        body {
+            background-color: #992d1a;
+            color: #e0943d;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .header {
+            text-align: center;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .image-container,
+        .info-box {
+            flex: 1;
+            max-width: 40%;
+            box-sizing: border-box;
+        }
+        .image-container {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .info-box {
+            border: 2px solid #61dafb;
+            border-radius: 10px;
+            border-color: #ffd9d9;
+            padding-right: 20px;
+            padding-left: 20px;
+            background-color: #fceeed;
+            font-size: 36px;
+        }
+
+        .loading-container {
+            width: 100%;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+
+        .loading-bar {
+            height: 30px;
+            max-width: 100%;
+            width: 0;
+            background-color: #4caf50;
+            transition: width 3s linear;
+        }
+
+        .loading-bar.short-transition {
+            transition: width 1s linear;
+        }     
+        
+        .progress-bar {
+            background-color: #e0e0e0;
+            height: 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+          }
+          
+          #progress-value {
+            background-color: #4caf50;
+            height: 100%;
+            width: 0%;
+            text-align: center;
+            line-height: 20px;
+            color: #fff;
+          }
+          
+          .attack-count {
+            font-size: 48px;
+            font-weight: bold;
+            color: #e0943d;
+          }
+                  
+    </style>
+</body>
+
+</html>

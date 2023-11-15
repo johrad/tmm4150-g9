@@ -23,7 +23,7 @@ attacksOld = 0
 @app.route('/')
 def start_page():
     data = {'battery_percentage': battery_percentage, 'attacks': attacks}
-    return render_template('main.html', **data)
+    return render_template('main_blue.html', **data)
 
 @app.route('/upload', methods=['POST'])
 def receive_data():
