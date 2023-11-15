@@ -9,6 +9,17 @@ compressorBoolean = 0
 attacks = 0
 attacksOld = 0
 
+# min_voltage = 11.7
+# max_voltage = 12.6
+# voltage_range = max_voltage - min_voltage
+
+# def voltage_to_percentage(current_voltage):
+#     voltage_offset = current_voltage - min_voltage
+#     percentage = (voltage_offset / voltage_range) * 100
+#     percentage = max(0, min(100, percentage))
+    
+#     return percentage
+
 @app.route('/')
 def start_page():
     data = {'battery_percentage': battery_percentage, 'attacks': attacks}
