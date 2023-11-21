@@ -32,7 +32,7 @@ cd tmm4150-g9/
 
 2. Make sure you have a `config.py` placed in the `tmm4150-g9/pi-side` directory. This file must contain a variable called `serverAddress = "<serverIp>:<port>"`.
 
-3. Install the [gpiozero](https://gpiozero.readthedocs.io/en/latest/) pip:
+3. Install the [gpiozero](https://gpiozero.readthedocs.io/en/latest/) package via pip:
 
 ```bash
 pip install -U gpiozero
